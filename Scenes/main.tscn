@@ -1,0 +1,379 @@
+[gd_scene load_steps=34 format=3 uid="uid://bdq5jmrvbrob1"]
+
+[ext_resource type="Script" uid="uid://bf3sia2semv7j" path="res://Scenes/main.gd" id="1_bo1nx"]
+[ext_resource type="Script" uid="uid://c0xtriwd1uh1r" path="res://Scenes/camera.gd" id="2_8gbba"]
+[ext_resource type="PackedScene" uid="uid://byk755xyb5m3w" path="res://Scenes/chess_board.tscn" id="3_8gbba"]
+[ext_resource type="Script" uid="uid://cwhmflg1l35gq" path="res://Scenes/raycast.gd" id="3_jjvhh"]
+[ext_resource type="ArrayMesh" uid="uid://c8evd5agu1a1x" path="res://Pawn.res" id="5_kry3j"]
+[ext_resource type="Script" uid="uid://cmfr46ws8r3sg" path="res://Scenes/piece.gd" id="6_21xkr"]
+
+[sub_resource type="Animation" id="Animation_21xkr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(4, 5, 1.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.785398, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kry3j"]
+resource_name = "SwitchSides"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.25, 2.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(4, 5, 1.5), Vector3(9.5, 5, -4), Vector3(4, 5, -9.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.785398, 0, 0), Vector3(-0.785398, 3.14159, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6bp64"]
+_data = {
+&"RESET": SubResource("Animation_21xkr"),
+&"SwitchSides": SubResource("Animation_kry3j")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kry3j"]
+albedo_color = Color(0.0937591, 0.0937591, 0.0937591, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_21xkr"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_21xkr"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_344ge"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_ynf5e"]
+material = SubResource("StandardMaterial3D_344ge")
+size = Vector3(1, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6bp64"]
+albedo_color = Color(0.0421577, 0.0421577, 0.0421577, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_344ge"]
+material = SubResource("StandardMaterial3D_6bp64")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6bp64"]
+top_radius = 0.15
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ynf5e"]
+albedo_color = Color(0.0674377, 0.0674377, 0.0674377, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hptm8"]
+material = SubResource("StandardMaterial3D_ynf5e")
+top_radius = 0.15
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ynf5e"]
+top_radius = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_hptm8"]
+radius = 0.25
+height = 0.75
+
+[sub_resource type="BoxMesh" id="BoxMesh_21xkr"]
+size = Vector3(1, 2.225, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_d1ilt"]
+top_radius = 0.0
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6iyac"]
+albedo_color = Color(0.147672, 0.147672, 0.147672, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fdnlq"]
+material = SubResource("StandardMaterial3D_6iyac")
+size = Vector3(1, 2.225, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hptm8"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jkdf5"]
+material = SubResource("StandardMaterial3D_hptm8")
+top_radius = 0.0
+height = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d1ilt"]
+albedo_color = Color(0.0885599, 0.0885599, 0.0885599, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6iyac"]
+material = SubResource("StandardMaterial3D_d1ilt")
+top_radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fdnlq"]
+albedo_color = Color(0.142858, 0.142858, 0.142858, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_jkdf5"]
+material = SubResource("StandardMaterial3D_fdnlq")
+radius = 0.25
+height = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21xkr"]
+albedo_color = Color(6.31716e-08, 0.267635, 9.62615e-08, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6bp64"]
+material = SubResource("StandardMaterial3D_21xkr")
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_bo1nx")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 4, 5, 1.5)
+script = ExtResource("2_8gbba")
+
+[node name="RayCast3D" type="RayCast3D" parent="Camera3D"]
+collide_with_areas = true
+script = ExtResource("3_jjvhh")
+
+[node name="CDBeforePlaying" type="Timer" parent="Camera3D"]
+wait_time = 2.5
+one_shot = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.392177, 0.91989, -8.5262e-08, -0.424103, 0.180808, 0.887381, 0.816293, -0.34801, 0.461036, -2.15065, 0.255137, -3.83857)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6bp64")
+}
+
+[node name="ChessBoard" parent="." instance=ExtResource("3_8gbba")]
+
+[node name="WhitePawn" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.375, 0, 0, 0, 0.25, 0.5, 0.4, -1.5)
+mesh = ExtResource("5_kry3j")
+script = ExtResource("6_21xkr")
+
+[node name="BlackPawn" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.375, 0, 0, 0, 0.25, 0.5, 0.4, -6.5)
+mesh = ExtResource("5_kry3j")
+surface_material_override/0 = SubResource("StandardMaterial3D_kry3j")
+script = ExtResource("6_21xkr")
+
+[node name="BlackPawn2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.375, 0, 0, 0, 0.25, 1.5, 0.4, -6.5)
+mesh = ExtResource("5_kry3j")
+surface_material_override/0 = SubResource("StandardMaterial3D_kry3j")
+script = ExtResource("6_21xkr")
+
+[node name="BlackPawn3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.375, 0, 0, 0, 0.25, 2.5, 0.4, -6.5)
+mesh = ExtResource("5_kry3j")
+surface_material_override/0 = SubResource("StandardMaterial3D_kry3j")
+script = ExtResource("6_21xkr")
+
+[node name="BlackPawn4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.375, 0, 0, 0, 0.25, 3.5, 0.4, -6.5)
+mesh = ExtResource("5_kry3j")
+surface_material_override/0 = SubResource("StandardMaterial3D_kry3j")
+script = ExtResource("6_21xkr")
+
+[node name="BlackPawn5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.375, 0, 0, 0, 0.25, 4.5, 0.4, -6.5)
+mesh = ExtResource("5_kry3j")
+surface_material_override/0 = SubResource("StandardMaterial3D_kry3j")
+script = ExtResource("6_21xkr")
+
+[node name="BlackPawn6" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.375, 0, 0, 0, 0.25, 5.5, 0.4, -6.5)
+mesh = ExtResource("5_kry3j")
+surface_material_override/0 = SubResource("StandardMaterial3D_kry3j")
+script = ExtResource("6_21xkr")
+
+[node name="BlackPawn7" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.375, 0, 0, 0, 0.25, 6.5, 0.4, -6.5)
+mesh = ExtResource("5_kry3j")
+surface_material_override/0 = SubResource("StandardMaterial3D_kry3j")
+script = ExtResource("6_21xkr")
+
+[node name="BlackPawn8" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.375, 0, 0, 0, 0.25, 7.5, 0.4, -6.5)
+mesh = ExtResource("5_kry3j")
+surface_material_override/0 = SubResource("StandardMaterial3D_kry3j")
+script = ExtResource("6_21xkr")
+
+[node name="WhitePawn2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.375, 0, 0, 0, 0.25, 1.5, 0.4, -1.5)
+mesh = ExtResource("5_kry3j")
+script = ExtResource("6_21xkr")
+
+[node name="WhitePawn3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.375, 0, 0, 0, 0.25, 2.5, 0.4, -1.5)
+mesh = ExtResource("5_kry3j")
+script = ExtResource("6_21xkr")
+
+[node name="WhitePawn4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.375, 0, 0, 0, 0.25, 3.5, 0.4, -1.5)
+mesh = ExtResource("5_kry3j")
+script = ExtResource("6_21xkr")
+
+[node name="WhitePawn5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.375, 0, 0, 0, 0.25, 4.5, 0.4, -1.5)
+mesh = ExtResource("5_kry3j")
+script = ExtResource("6_21xkr")
+
+[node name="WhitePawn6" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.375, 0, 0, 0, 0.25, 5.5, 0.4, -1.5)
+mesh = ExtResource("5_kry3j")
+script = ExtResource("6_21xkr")
+
+[node name="WhitePawn7" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.375, 0, 0, 0, 0.25, 6.5, 0.4, -1.5)
+mesh = ExtResource("5_kry3j")
+script = ExtResource("6_21xkr")
+
+[node name="WhitePawn8" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.375, 0, 0, 0, 0.25, 7.5, 0.4, -1.5)
+mesh = ExtResource("5_kry3j")
+script = ExtResource("6_21xkr")
+
+[node name="WhiteRook" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.5, 0, 0, 0, 0.75, 0.5, 0.460473, -0.5)
+mesh = SubResource("CylinderMesh_21xkr")
+script = ExtResource("6_21xkr")
+type = "Rook"
+
+[node name="WhiteKnight" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.5, 0, 0, 0, 0.75, 1.5, 0.46, -0.5)
+mesh = SubResource("PrismMesh_21xkr")
+script = ExtResource("6_21xkr")
+type = "Knight"
+
+[node name="BlackKnight" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.5, 0, 0, 0, 0.75, 1.5, 0.46, -7.5)
+mesh = SubResource("PrismMesh_ynf5e")
+script = ExtResource("6_21xkr")
+type = "Knight"
+
+[node name="BlackKnight2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.5, 0, 0, 0, 0.75, 6.5, 0.46, -7.5)
+mesh = SubResource("PrismMesh_ynf5e")
+script = ExtResource("6_21xkr")
+type = "Knight"
+
+[node name="WhiteKnight2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.5, 0, 0, 0, 0.75, 6.5, 0.46, -0.5)
+mesh = SubResource("PrismMesh_21xkr")
+script = ExtResource("6_21xkr")
+type = "Knight"
+
+[node name="BlackRook" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.5, 0, 0, 0, 0.75, 0.5, 0.46, -7.5)
+mesh = SubResource("CylinderMesh_344ge")
+script = ExtResource("6_21xkr")
+type = "Rook"
+
+[node name="BlackRook2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.5, 0, 0, 0, 0.75, 7.5, 0.46, -7.5)
+mesh = SubResource("CylinderMesh_344ge")
+script = ExtResource("6_21xkr")
+type = "Rook"
+
+[node name="WhiteRook2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.5, 0, 0, 0, 0.75, 7.5, 0.46, -0.5)
+mesh = SubResource("CylinderMesh_21xkr")
+script = ExtResource("6_21xkr")
+type = "Rook"
+
+[node name="WhiteBishop" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.5, 0, 0, 0, 0.75, 2.5, 0.46, -0.5)
+mesh = SubResource("CylinderMesh_6bp64")
+script = ExtResource("6_21xkr")
+type = "Bishop"
+
+[node name="BlackBishop" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.5, 0, 0, 0, 0.75, 2.5, 0.46, -7.5)
+mesh = SubResource("CylinderMesh_hptm8")
+script = ExtResource("6_21xkr")
+type = "Bishop"
+
+[node name="BlackBishop2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.5, 0, 0, 0, 0.75, 5.5, 0.46, -7.5)
+mesh = SubResource("CylinderMesh_hptm8")
+script = ExtResource("6_21xkr")
+type = "Bishop"
+
+[node name="WhiteBishop2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.5, 0, 0, 0, 0.75, 5.5, 0.46, -0.5)
+mesh = SubResource("CylinderMesh_6bp64")
+script = ExtResource("6_21xkr")
+type = "Bishop"
+
+[node name="WhiteQueen" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.5, 0, 0, 0, 0.75, 3.5, 0.46, -0.5)
+mesh = SubResource("CylinderMesh_ynf5e")
+script = ExtResource("6_21xkr")
+type = "Queen"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WhiteQueen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("SphereMesh_hptm8")
+
+[node name="WhiteKing" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.5, 0, 0, 0, 0.75, 4.5, 0.562495, -0.5)
+mesh = SubResource("BoxMesh_21xkr")
+script = ExtResource("6_21xkr")
+type = "King"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WhiteKing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35143, 0)
+mesh = SubResource("CylinderMesh_d1ilt")
+
+[node name="BlackKing" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.5, 0, 0, 0, 0.75, 4.5, 0.562, -7.5)
+mesh = SubResource("BoxMesh_fdnlq")
+script = ExtResource("6_21xkr")
+type = "King"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BlackKing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35143, 0)
+mesh = SubResource("CylinderMesh_jkdf5")
+
+[node name="BlackQueen" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.5, 0, 0, 0, 0.75, 3.5, 0.46, -7.5)
+mesh = SubResource("CylinderMesh_6iyac")
+script = ExtResource("6_21xkr")
+type = "Queen"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="BlackQueen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("SphereMesh_jkdf5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(60.635, 0, 0, 0, 0.1, 0, 0, 0, 57.24, 3.95027, -0.212445, -3.5958)
+mesh = SubResource("PlaneMesh_6bp64")
